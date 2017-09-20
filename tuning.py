@@ -21,3 +21,21 @@ for fname in files:
    plt.plot(x,u)
 
 plt.show()
+import tables
+fid=tables.open_file("ce60cmax1isc75meshh/profiles/prof035000.h5",'r')
+for group in fid.walk_groups():
+    groups.append(group)
+groups[0]
+groups[1]
+prof=groups[0].profiles
+prof
+prof._v_attrs
+g[0].x
+groups[0].x.read()
+%history
+bob=prof._v_attrs
+bob
+bob.dtype
+bob.__contains__('gamma')
+bob.__contains__('CFL')
+bob.__contains__('dt')
