@@ -43,15 +43,28 @@ for fname in files:
    else:
       ce=''
    if param.__contains__('isc'):
-      isc=', $\mathscr{P}$= %.1e' % param.isc
+      ipr=param.isc
+      isc=', $\mathscr{P}$= %.1e' % ipr
    else:
       isc=''
+      ipr=1
 
-#  u=prof.cmt.u.read()
+   u=prof.cmt.u.read()
    T=prof.cmt.T.read()
+   mumax=prof.cmt.mumax.read()
+   nus=prof.cmt.artdiff.read()
+   mu=nus/ipr
 
    zelab='N ='+str(N)+', t='+t+step+cmax+ce+isc
+   plt.subplot(221)
+   plt.plot(x,u,label=zelab)
+   plt.subplot(222)
    plt.plot(x,T,label=zelab)
+   plt.subplot(223)
+   plt.plot(x,mumax,label=zelab)
+   plt.subplot(224)
+   plt.plot(x,mu,label=zelab)
+   fid.close()
 
 plt.legend()
 plt.show()
