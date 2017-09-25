@@ -3,7 +3,8 @@ import tables
 files=["ce45cmax0.5messh/profiles/prof99999.h5",
 "p12/ce40cmax1isc0.75/prof350000.h5",
 "p12/profiles/prof350000.h5",
-"ce60cmax1isc75meshh/profiles/prof035000.h5"]
+"ce60cmax1isc75meshh/prof035000.h5",
+"ce60cmax1isc75meshh/oops/prof035000.h5"]
 # t<0.035 "ce40cmax0.3meshh/profiles/prof33611.h5",
 # t=0.05, not 0.035 "ce40cmax0.5meshh/profiles/prof99999.h5",
 

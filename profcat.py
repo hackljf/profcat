@@ -6,7 +6,10 @@ def profcat(prefix,ncol,nx1,nfiles):
    ntmp=0
    ipad=int(np.ceil(np.log10(nfiles)))
    for p in range(nfiles):
-      zefile=prefix+str(p).zfill(ipad)
+      if nfiles>1:
+         zefile=prefix+str(p).zfill(ipad)
+      else:
+         zefile=prefix
       if os.access(zefile,os.F_OK):
          if (os.stat(zefile).st_size>0):
             tmp=np.loadtxt(zefile)
