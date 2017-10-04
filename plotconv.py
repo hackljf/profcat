@@ -2,6 +2,39 @@ from matplotlib import pyplot as plt
 import os
 import tables
 
+def hdr2lab(profgrp): # betta be HDF5 file written by prof2h5
+# extract simulation parameters from header
+# there has got to be a better way of doing this. dictionary view?
+   hdr=profgrp._v_attrs
+   if hdr.__contains__('time'):
+      t='%.2e' % header.time
+   else:
+      t='???'
+
+   param=profgrp.cmt._v_attrs
+   if param.__contains__('CFL'):
+      step=', CFL= %.1f' % param.cfl
+   elif param.__contains__('dt'):
+      step=', $\Delta t$= %.1e' % param.dt
+   else:
+      step=''
+   if param.__contains__('cmax'):
+      cmax=', $c_{max}$= %.1e' % param.cmax
+   else:
+      cmax=''
+   if param.__contains__('ce'):
+      ce=', $c_{E}$= %.1e' % param.ce
+   else:
+      ce=''
+   if param.__contains__('isc'):
+      ipr=param.isc
+      isc=', $\mathscr{P}$= %.1e' % ipr
+   else:
+      isc=''
+      ipr=1
+   lab=t+step+cmax+ce+isc
+   return lab
+
 orders=[4,8,12,16]
 mks=['.','x','v','None']
 nelms=[50,100,200]
@@ -26,33 +59,7 @@ for k,K in enumerate(nelms):
          hdr=prof._v_attrs
          N=hdr.nx1-1
 
-# there has got to be a better way of doing this. dictionary view?
-         if hdr.__contains__('time'):
-            t='%.2e' % hdr.time
-         else:
-            t='???'
-      
-         param=prof.cmt._v_attrs
-         if param.__contains__('CFL'):
-            step=', CFL= %.1f' % param.cfl
-         elif param.__contains__('dt'):
-            step=', $\Delta t$= %.1e' % param.dt
-         else:
-            step=''
-         if param.__contains__('cmax'):
-            cmax=', $c_{max}$= %.1e' % param.cmax
-         else:
-            cmax=''
-         if param.__contains__('ce'):
-            ce=', $c_{E}$= %.1e' % param.ce
-         else:
-            ce=''
-         if param.__contains__('isc'):
-            ipr=param.isc
-            isc=', $\mathscr{P}$= %.1e' % ipr
-         else:
-            isc=''
-            ipr=1
+         zelab=hdr2lab(prof)
       
          u=prof.cmt.u.read()
          T=prof.cmt.T.read()
@@ -60,8 +67,7 @@ for k,K in enumerate(nelms):
          mumax=prof.cmt.mumax.read()
          nus=prof.cmt.artdiff.read()
          mu=nus/ipr
-#        zelab='p ='+str(N)+', t='+t+step+cmax+ce+isc
-         zelab='h ='+str(h[k])+', t='+t+step+cmax+ce+isc
+         zelab='h ='+str(h[k])+', t='+zelab
          plt.plot(x,rho,label=zelab)
 #        plt.plot(x,T,label=zelab)
 #        plt.plot(x,u,label=zelab)
