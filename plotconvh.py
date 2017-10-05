@@ -21,7 +21,8 @@ fsize=18
 for k,K in enumerate(nelms):
    plt.figure(figsize=(width,height))
    main=plt.axes() # FIDELIUM ANIMAE de whoever gave this SANE DEFAULTS!!!!
-   i1=plt.axes([0.4,0.175,0.33,0.45])
+#  i1=plt.axes([0.4,0.175,0.33,0.45]) # u
+   i1=plt.axes([0.43,0.43,0.44,0.44])
    for i,p in enumerate(orders):
       case='N'+str(K)+'_p'+str(p)
       zefile=case+'/profiles/prof020001.h5'
@@ -55,22 +56,27 @@ for k,K in enumerate(nelms):
             nus=prof.cmt.artdiff.read()
             mu=nus/ipr
             zelab='p ='+str(N)
-#           plt.plot(x,rho,label=zelab)
-#           plt.plot(x,T,label=zelab)
-            main.plot(x,u,label=zelab)
+            main.plot(x,rho,label=zelab)
+#           main.plot(x,T,label=zelab)
+#           main.plot(x,u,label=zelab)
             main.set_xlabel(r'$x$',fontsize=fsize)
-            main.set_ylabel(r'$u$',fontsize=fsize)
+#           main.set_ylabel(r'$u$',fontsize=fsize)
+            main.set_ylabel(r'$\rho$',fontsize=fsize)
             main.set_xlim((0.2,1.0)) # need to start storing and
-            i1.set_xlim((0.475,0.85)) # need to start storing and
-            i1.set_ylim((0.926,0.930))# func-ifying these xlims
-            i1.set_xticks([0.5,0.6,0.7,0.8])
-            i1.set_yticks([0.926,0.928,0.93])
-            i1.plot(x,u)
+            i1.set_xlim((0.5,0.675)) # need to start storing and
+#           i1.set_ylim((0.926,0.930))# u func-ifying these xlims
+            i1.set_ylim((0.424,0.428))# func-ifying these xlims
+            i1.set_xticks([0.5,0.55,0.6,0.65]) #rho
+#           i1.set_yticks([0.926,0.928,0.93]) #u
+            i1.set_yticks([0.424,0.425,0.426,0.427,0.428]) #rho
+#           i1.plot(x,u)
+            i1.plot(x,rho)
 
             fid.close()
 
-   main.legend(loc='upper left')
+   main.legend(loc='lower left')
 
-   pname='sod3_u_t02_N'+str(K)+'.pdf'
+#  pname='sod3_u_t02_N'+str(K)+'.pdf'
+   pname='sod3_rho_t02_N'+str(K)+'.pdf'
    plt.savefig(pname)
    plt.close()
