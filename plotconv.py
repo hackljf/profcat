@@ -17,6 +17,8 @@ width=8.5
 height=5
 fsize=18
 
+exact=np.loadtxt("e1rpex.out",usecols=(0,1))
+
 for i,p in enumerate(orders):
    plt.figure(figsize=(width,height))
    main=plt.axes() # FIDELIUM ANIMAE de whoever gave this SANE DEFAULTS!!!!
@@ -77,6 +79,8 @@ for i,p in enumerate(orders):
             fid.close()
 
 #  main.legend(loc='upper left') #u
+   main.plot(exact[:,0],exact[:,1],label='exact')
+   i1.plot(exact[:,0],exact[:,1])
    main.legend(loc='lower left')
 
 #  pname='sod3_u_t02_p'+str(p)+'.pdf'
