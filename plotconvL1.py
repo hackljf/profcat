@@ -1,0 +1,5 @@
+plt.loglog(p,p**m_pconv*(10**b_pconv),'r-s',p,pconv,'b.-')                                                         
+plt.xlabel(r'$h$',fontsize=fsize)                                                                                  
+plt.tight_layout()
+plt.savefig('shock2_rho_hconv_p8.pdf')                                                                             
+plt.close()
