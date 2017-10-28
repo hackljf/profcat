@@ -1,4 +1,4 @@
-function [L1,exctav,cmtavg]=proferr(prof,dset,exact,xl,xr,xshift)
+function [L1,exctav,cmtavg,xtest]=proferr(prof,dset,exact,xl,xr,xshift)
 
 % Read profile dset from HDF5 file prof, compare to reference solution called exact,
 % and compare averages over elements to averages of reference solution
