@@ -11,10 +11,12 @@ import numpy as np
 # 12   2.3256098e-03   1.2906252e-03   8.9164813e-04
 # 16   1.6363029e-03   9.1666984e-04   6.7556901e-04
 
-tmp=np.loadtxt("conv_sod_avg2avg",usecols=(1,2,3))
+#tmp=np.loadtxt("conv_sod_avg2avg",usecols=(1,2,3))
+tmp=np.loadtxt("convLinf",usecols=(1,2,3))
 err=tmp[1:,:]
 spacings=tmp[0,:]
-orders=np.loadtxt("conv_sod_avg2avg",usecols=(0,),skiprows=1)
+#orders=np.loadtxt("conv_sod_avg2avg",usecols=(0,),skiprows=1)
+orders=np.loadtxt("convLinf",usecols=(0,),skiprows=1)
 EOCh=[]
 
 #plt.figure()
