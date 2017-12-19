@@ -2,14 +2,15 @@
 import numpy as np
 import os
 
-def profcat(prefix,ncol,nx1,nfiles):
+def profcat(prefix,ncol,nx1,nfiles,suffix=''):
    ntmp=0
    ipad=int(np.ceil(np.log10(nfiles)))
    for p in range(nfiles):
       if nfiles>1:
-         zefile=prefix+str(p).zfill(ipad)
+         zefile=prefix+str(p).zfill(ipad)+suffix
       else:
          zefile=prefix
+      print zefile
       if os.access(zefile,os.F_OK):
          if (os.stat(zefile).st_size>0):
             tmp=np.loadtxt(zefile)
@@ -18,7 +19,15 @@ def profcat(prefix,ncol,nx1,nfiles):
                fullprof=tmp
             else:
                fullprof=np.vstack((fullprof,tmp))
-   fullprof=fullprof.reshape((-1,nx1,ncol))
-   vertices=fullprof[:,0,0]
-   fullprof=fullprof[vertices.argsort(),:,:].reshape((-1,ncol))
-   return fullprof
+   if ntmp==0:
+      print 'bad prefix'
+      print prefix
+      print 'no files found!!!!!!!!!!'
+   else:
+      fullprof=fullprof.reshape((-1,nx1,ncol))
+      vertices=fullprof[:,0,0]
+      fullprof=fullprof[vertices.argsort(),:,:].reshape((-1,ncol))
+      return fullprof
+
+#profiles=profcat('rhoprof.nid.','.step.0300',5,5,10000)
+#np.savetxt('profiles.step.0300',profiles)
